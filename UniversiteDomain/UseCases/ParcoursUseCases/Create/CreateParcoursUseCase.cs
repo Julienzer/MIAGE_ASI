@@ -31,7 +31,7 @@ public class CreateParcoursUseCase(IRepositoryFactory repositoryFactory)
         // On recherche un parcours avec le même nom de parcours
         List<Parcours> existe = await repositoryFactory.ParcoursRepository().FindByConditionAsync(e=>e.NomParcours.Equals(parcours.NomParcours));
         // Si un parcours avec le même nom existe déjà, on lève une exception personnalisée
-        if (existe .Any()) throw new DuplicateNomParcoursException(parcours.NomParcours+ " - ce Nom de parcours est déjà affecté à un parcours");
+        if (existe != null) throw new DuplicateNomParcoursException(parcours.NomParcours+ " - ce Nom de parcours est déjà affecté à un parcours");
         // Vérification de l'année de formation
         if (parcours.AnneeFormation < 1 && parcours.AnneeFormation > 2) throw new InvalidAnneeFormationException(parcours.AnneeFormation + " - Année de formation incorrecte");
         // On vérifie si l'année de formation est déjà utilisée

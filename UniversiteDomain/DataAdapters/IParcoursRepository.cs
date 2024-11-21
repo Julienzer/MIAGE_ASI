@@ -17,6 +17,12 @@ public interface IParcoursRepository
     Task<Parcours> AddEtudiantAsync(Parcours ? parcours, List<Etudiant> etudiants);
     Task<Parcours> AddEtudiantAsync(long idParcours, long[] idEtudiants);
     
+    Task<Parcours> AddUeAsync(Parcours parcours, Ue ue);
+    Task<Parcours> AddUeAsync(long idParcours, long ue);
+    Task<Parcours> AddUeAsync(Parcours ? idParcours, List<Ue> ue);
+    Task<Parcours> AddUeAsync(long idParcours, long[] idUes);
+    
+    
     Task<List<Parcours>> FindByConditionAsync(Expression<Func<Parcours, bool>> condition);
     Task<List<Parcours>> FindAllAsync();
     Task SaveChangesAsync();
