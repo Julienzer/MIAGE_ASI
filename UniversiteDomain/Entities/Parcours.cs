@@ -11,6 +11,8 @@ public class Parcours
     public List<Etudiant>? Inscrits { get; set; } = new();  
     // ManyToMany : un parcours contient plusieurs Ues  
     public List<Ue>? UesEnseignees { get; set; } = new();
+    public object Ues { get; set; }
+
     public override string ToString()
     {
         return "ID "+Id +" : "+NomParcours+" - Master "+AnneeFormation;

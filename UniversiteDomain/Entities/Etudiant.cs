@@ -10,6 +10,9 @@ public class Etudiant
     
     // ManyToOne : l'étudiant est inscrit dans un parcours
     public Parcours? ParcoursSuivi { get; set; } = null;
+    
+    //ManyToMany : l'étudiant a plusieurs notes
+    public List<Note> Notes { get; set; } = new List<Note>();
 
     public override string ToString()
     {

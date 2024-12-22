@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversiteDomain", "Univers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversiteDomainUnitTests", "UniversiteDomainUnitTests\UniversiteDomainUnitTests.csproj", "{92B4CD09-BC57-4D70-B1FC-08F402C4A05A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversiteEFDataProvider", "UniversiteEFDataProvider\UniversiteEFDataProvider.csproj", "{8CB92343-7CA6-413F-A847-E2A8B7072819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversiteRestApi", "UniversiteRestApi\UniversiteRestApi.csproj", "{592C58B8-09F9-4E4A-9C17-1C0AE49ED22C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{94EE91CB-2355-4EBA-8FEF-7615CB5569CF} = {2BB83353-53CE-46F3-9316-434EE2B7F95C}
 		{92B4CD09-BC57-4D70-B1FC-08F402C4A05A} = {CF045524-B07D-4064-8426-A4F35B585B0E}
+		{8CB92343-7CA6-413F-A847-E2A8B7072819} = {2942D5E1-F287-478B-918A-B56AE0D0D631}
+		{592C58B8-09F9-4E4A-9C17-1C0AE49ED22C} = {67774CBD-99E7-4C38-ACE2-5B1E678AF024}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{94EE91CB-2355-4EBA-8FEF-7615CB5569CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +36,13 @@ Global
 		{92B4CD09-BC57-4D70-B1FC-08F402C4A05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92B4CD09-BC57-4D70-B1FC-08F402C4A05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92B4CD09-BC57-4D70-B1FC-08F402C4A05A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB92343-7CA6-413F-A847-E2A8B7072819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB92343-7CA6-413F-A847-E2A8B7072819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB92343-7CA6-413F-A847-E2A8B7072819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB92343-7CA6-413F-A847-E2A8B7072819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592C58B8-09F9-4E4A-9C17-1C0AE49ED22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592C58B8-09F9-4E4A-9C17-1C0AE49ED22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592C58B8-09F9-4E4A-9C17-1C0AE49ED22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592C58B8-09F9-4E4A-9C17-1C0AE49ED22C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
