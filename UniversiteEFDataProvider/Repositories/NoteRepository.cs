@@ -7,7 +7,7 @@ namespace UniversiteEFDataProvider.Repositories;
 
 public class NoteRepository(UniversiteDbContext context) : Repository<Note>(context), INoteRepository
 {
-    public async Task AffecterNoteAsync(long idEtudiant, long idUe, double note)
+    public async Task AffecterNoteAsync(long idEtudiant, long idUe, float note)
     {
         ArgumentNullException.ThrowIfNull(Context.Etudiants);
         ArgumentNullException.ThrowIfNull(Context.Ues);
@@ -18,7 +18,7 @@ public class NoteRepository(UniversiteDbContext context) : Repository<Note>(cont
         await Context.SaveChangesAsync();
     }
     
-    public async Task AffecterNoteAsync(Etudiant etudiant, Ue ue, double note)
+    public async Task AffecterNoteAsync(Etudiant etudiant, Ue ue, float note)
     {
         await AffecterNoteAsync(etudiant.Id, ue.Id, note);
     }
@@ -33,13 +33,6 @@ public class NoteRepository(UniversiteDbContext context) : Repository<Note>(cont
     {
         return await GetNoteAsync(etudiant.Id, ue.Id);
     }
-    
-    public async Task<IEnumerable<Note>> GetNotesAsync(long idEtudiant)
-    {
-        ArgumentNullException.ThrowIfNull(Context.Notes);
-        return await Context.Notes.Where(n => n.IdEtudiant == idEtudiant).ToListAsync();
-    }
-    
     public async Task<IEnumerable<Note>> GetNotesAsync(Etudiant etudiant)
     {
         return await GetNotesAsync(etudiant.Id);
