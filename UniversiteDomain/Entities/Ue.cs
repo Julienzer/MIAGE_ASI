@@ -10,8 +10,6 @@ public class Ue
     
     //ManyToMany : une Ue a plusieurs notes
     public List<Note>? Notes { get; set; } = new();
-    public Parcours Parcours { get; set; }
-
     public override string ToString()
     {
         return "ID "+Id +" : "+NumeroUe+" - "+Intitule;

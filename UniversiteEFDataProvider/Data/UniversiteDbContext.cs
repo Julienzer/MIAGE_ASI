@@ -23,7 +23,7 @@ public class UniversiteDbContext : DbContext
             .EnableSensitiveDataLogging() 
             .EnableDetailedErrors();
     }
-protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Propriétés de la table Etudiant
         // Clé primaire
@@ -68,7 +68,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .WithOne(n => n.Ue);
         
         // Propriétés de la table Note
-        // Clé primaire composite
+        // Clé primaire composite&
         modelBuilder.Entity<Note>()
             .HasKey(n => new { n.IdEtudiant, n.IdUe });
         // ManyToOne vers Etudiant
@@ -80,9 +80,8 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .HasOne(n => n.Ue)
             .WithMany(ue => ue.Notes);
     }
-public DbSet <Parcours>? Parcours { get; set; }
-public DbSet <Etudiant>? Etudiants { get; set; }
-public DbSet <Ue>? Ues { get; set; }
-public DbSet <Note>? Notes { get; set; }
-public object? Enseignants { get; set; }
+    public DbSet <Parcours>? Parcours { get; set; }
+    public DbSet <Etudiant>? Etudiants { get; set; }
+    public DbSet <Ue>? Ues { get; set; }
+    public DbSet <Note>? Notes { get; set; }
 }

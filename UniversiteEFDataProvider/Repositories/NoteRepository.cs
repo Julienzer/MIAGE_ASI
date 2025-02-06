@@ -18,9 +18,10 @@ public class NoteRepository(UniversiteDbContext context) : Repository<Note>(cont
         await Context.SaveChangesAsync();
     }
     
-    public async Task AffecterNoteAsync(Etudiant etudiant, Ue ue, float note)
+    public async Task<Etudiant> AffecterNoteAsync(Etudiant etudiant, Ue ue, float note)
     {
         await AffecterNoteAsync(etudiant.Id, ue.Id, note);
+        return etudiant;
     }
     
     public async Task<double> GetNoteAsync(long idEtudiant, long idUe)

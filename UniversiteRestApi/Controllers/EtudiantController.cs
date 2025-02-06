@@ -8,8 +8,15 @@ namespace UniversiteRestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EtudiantController(IRepositoryFactory repositoryFactory) : ControllerBase
+    public class EtudiantController : ControllerBase
     {
+        private readonly IRepositoryFactory _repositoryFactory;
+
+        public EtudiantController(IRepositoryFactory repositoryFactory)
+        {
+            _repositoryFactory = repositoryFactory;
+        }
+
         // GET: api/<EtudiantController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -26,29 +33,37 @@ namespace UniversiteRestApi.Controllers
 
         // POST api/<EtudiantController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] object value)
         {
+            if (value is string)
+            {
+                // Logique pour la méthode synchrone
+                // Si tu veux traiter le cas simple avec une chaîne de caractères (old behaviour)
+                return Ok("Traitement pour chaîne de caractères");
+            }
+            else if (value is Etudiant etudiant)
+            {
+                // Logique pour la méthode asynchrone
+                CreateEtudiantUseCase uc = new CreateEtudiantUseCase(_repositoryFactory);
+                await uc.ExecuteAsync(etudiant);
+                return Ok("Etudiant créé avec succès");
+            }
+
+            return BadRequest("Type de données non supporté");
         }
 
         // PUT api/<EtudiantController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            // Implémentation pour PUT (si nécessaire)
         }
 
         // DELETE api/<EtudiantController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
-        
-        // Crée un nouvel étudiant sans parcours
-        // POST api/<EtudiantApi>
-        [HttpPost]
-        public async Task PostAsync([FromBody] Etudiant etudiant)
-        {
-            CreateEtudiantUseCase uc=new CreateEtudiantUseCase(repositoryFactory);
-            await uc.ExecuteAsync(etudiant);
+            // Implémentation pour DELETE (si nécessaire)
         }
     }
 }

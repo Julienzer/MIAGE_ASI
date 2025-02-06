@@ -7,19 +7,21 @@ namespace UniversiteEFDataProvider.Repositories;
 
 public class UeRepository(UniversiteDbContext context) : Repository<Ue>(context), IUeRepository
 {
-    public async Task AffecterUeAsync(long idUe, long idParcours)
+    public async Task<Ue> AffecterUeAsync(long idUe, long idParcours)
     {
         ArgumentNullException.ThrowIfNull(Context.Ues);
         ArgumentNullException.ThrowIfNull(Context.Parcours);
         Ue ue = (await Context.Ues.FindAsync(idUe))!;
         Parcours parcours = (await Context.Parcours.FindAsync(idParcours))!;
-        ue.Parcours = parcours;
+        ue.EnseigneeDans.Add(parcours);
         await Context.SaveChangesAsync();
+        return ue;
     }
     
-    public async Task AffecterUeAsync(Ue ue, Parcours parcours)
+    public async Task<Ue> AffecterUeAsync(Ue ue, Parcours parcours)
     {
         await AffecterUeAsync(ue.Id, parcours.Id); 
+        return ue;
     }
     
 }
