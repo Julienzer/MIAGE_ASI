@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniversiteDomain.DataAdapters.DataAdaptersFactory;
+using UniversiteDomain.Dtos;
 using UniversiteDomain.Entities;
 using UniversiteDomain.UseCases.EtudiantUseCases.Create;
 
@@ -8,14 +9,9 @@ namespace UniversiteRestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EtudiantController : ControllerBase
+    public class EtudiantController(IRepositoryFactory repositoryFactory) : ControllerBase
     {
         private readonly IRepositoryFactory _repositoryFactory;
-
-        public EtudiantController(IRepositoryFactory repositoryFactory)
-        {
-            _repositoryFactory = repositoryFactory;
-        }
 
         // GET: api/<EtudiantController>
         [HttpGet]
@@ -30,26 +26,27 @@ namespace UniversiteRestApi.Controllers
         {
             return "value";
         }
-
+        
         // POST api/<EtudiantController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] object value)
+        public async Task<ActionResult<EtudiantDto>> PostAsync([FromBody] EtudiantDto etudiantDto)
         {
-            if (value is string)
+            CreateEtudiantUseCase createEtudiantUc = new CreateEtudiantUseCase(repositoryFactory);           
+            Etudiant etud = etudiantDto.ToEntity();
+            try
             {
-                // Logique pour la méthode synchrone
-                // Si tu veux traiter le cas simple avec une chaîne de caractères (old behaviour)
-                return Ok("Traitement pour chaîne de caractères");
+                etud = await createEtudiantUc.ExecuteAsync(etud);
             }
-            else if (value is Etudiant etudiant)
+            catch (Exception e)
             {
-                // Logique pour la méthode asynchrone
-                CreateEtudiantUseCase uc = new CreateEtudiantUseCase(_repositoryFactory);
-                await uc.ExecuteAsync(etudiant);
-                return Ok("Etudiant créé avec succès");
+                // On récupère ici les exceptions personnalisées définies dans la couche domain
+                // Et on les envoie avec le code d'erreur 400 et l'intitulé "erreurs de validation"
+                ModelState.AddModelError(nameof(e), e.Message);
+                return ValidationProblem();
             }
-
-            return BadRequest("Type de données non supporté");
+            EtudiantDto dto = new EtudiantDto().ToDto(etud);
+            // On revoie la route vers le get qu'on n'a pas encore écrit!
+            return CreatedAtAction(nameof(Get), new { id = dto.Id }, dto);
         }
 
         // PUT api/<EtudiantController>/5
