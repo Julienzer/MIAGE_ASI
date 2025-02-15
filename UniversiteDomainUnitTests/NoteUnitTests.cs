@@ -3,7 +3,8 @@ using Moq;
 using UniversiteDomain.DataAdapters;
 using UniversiteDomain.DataAdapters.DataAdaptersFactory;
 using UniversiteDomain.Entities;
-using UniversiteDomain.UseCases.NotesUseCases.Create;
+using UniversiteDomain.UseCases.NoteUseCases.Create;
+using UniversiteDomain.UseCases.NoteUseCases.Create;
 
 namespace UniversiteDomainUnitTests;
 
@@ -66,7 +67,7 @@ public class NoteUnitTests
         mockFactory.Setup(facto => facto.EtudiantRepository()).Returns(mockEtudiantRepository.Object);
 
         // Création du use case en injectant notre faux repository
-        CreateNotesUseCase useCase = new CreateNotesUseCase(mockFactory.Object);
+        CreateNoteUseCase useCase = new CreateNoteUseCase(mockFactory.Object);
         // Appel du use case
         var noteTeste = await useCase.ExecuteAsync(noteSansId);
 

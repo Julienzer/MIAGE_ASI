@@ -12,7 +12,7 @@ public class Etudiant
     public Parcours? ParcoursSuivi { get; set; } = null;
     
     //ManyToMany : l'étudiant a plusieurs notes
-    public List<Note> Notes { get; set; } = new List<Note>();
+    public List<Note> NotesObtenues { get; set; } = new();
 
     public override string ToString()
     {
